@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checkpoint - Teacher</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<!-- ===== DARK NAVBAR with profile chip ===== -->
+<div class="cinema-navbar">
+  <div class="shell nav-inner">
+    <div class="brand-logo-dark">Checkpoint</div>
+    <div class="nav-right-dark">
+      <div class="profile-chip-dark">
+        <div class="profile-avatar-dark" id="profile-avatar"></div>
+        <div class="profile-text-dark">
+          <span class="profile-name-dark" id="teacher-name"></span>
+          <span class="profile-role-dark">Teacher</span>
+        </div>
+      </div>
+      <button class="btn-logout-icon-dark" id="logout-btn" title="Log out">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- ===== NO CLASS STATE (unchanged, already matches the system) ===== -->
+  <div id="no-class" class="hidden create-class-wrap">
+    <div class="create-class-card">
+      <div class="create-class-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5v6"></path><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"></path></svg>
+      </div>
+      <h3 class="create-class-title">Create your first class</h3>
+      <p class="create-class-sub">Students will join using a short code you share with them.</p>
+      <label>Class name</label>
+      <input type="text" id="new-class-name" placeholder="e.g. Critical Thinking 201">
+      <button class="btn-create-class" id="create-class-btn">Create class</button>
+      <span class="back-to-dashboard-link" id="cancel-new-class">Back to dashboard</span>
+    </div>
+  </div>
+
+  <!-- ===== MAIN DASHBOARD ===== -->
+  <div id="dashboard" class="hidden dashboard-pad">
+
+    <!-- Class switcher + join code -->
+    <div class="flex-between toolbar-row">
+      <div class="flex" style="align-items:center; gap:10px;">
+        <div class="class-switcher-pro">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5v6"></path><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"></path></svg>
+          <select id="class-select"></select>
+          <svg class="switcher-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <button type="button" class="btn-new-class-sm" id="add-class-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          New class
+        </button>
+      </div>
+      <div class="join-code-elegant">
+        <div class="join-code-info">
+          <span class="join-code-label">Join code</span>
+          <span class="join-code-value" id="class-code"></span>
+        </div>
+        <button type="button" class="copy-code-btn" id="copy-code-btn" title="Copy code">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <span id="copy-code-label">Copy</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Stat row (visual now, wired up in a follow-up JS pass) -->
+    <div class="stat-row-dashboard">
+      <div class="stat-tile-light">
+        <div class="stat-tile-label">Students</div>
+        <div class="stat-tile-value" id="stat-students">-</div>
+      </div>
+      <div class="stat-tile-light">
+        <div class="stat-tile-label">Quizzes</div>
+        <div class="stat-tile-value" id="stat-quiz-count">-</div>
+      </div>
+      <div class="stat-tile-teal">
+        <div class="stat-tile-label">Avg score</div>
+        <div class="stat-tile-value" id="stat-avg-score">-</div>
+      </div>
+      <div class="stat-tile-dark">
+        <div class="stat-tile-label-dark">Live pulse</div>
+        <div class="stat-tile-value-dark" id="stat-pulse-status">Not active</div>
+      </div>
+    </div>
+
+    <!-- Quiz builder + quiz list -->
+    <div class="grid-2col">
+      <div class="card quiz-builder-card">
+        <div class="quiz-builder-header">
+          <div class="create-class-icon" style="margin:0;">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+          </div>
+          <div>
+            <h3 style="margin-bottom:2px;">New quiz</h3>
+            <p class="muted" style="margin:0;">Build a short checkpoint for your class</p>
+          </div>
+        </div>
+
+        <label>Title</label>
+        <input type="text" id="quiz-title" placeholder="e.g. Necessary vs Sufficient Conditions">
+
+        <label>Open for</label>
+        <div class="duration-input-wrap">
+          <input type="number" id="quiz-minutes" value="60">
+          <span class="duration-suffix">minutes</span>
+        </div>
+
+        <div id="question-list"></div>
+
+        <button type="button" class="btn-add-question" id="add-question-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add question
+        </button>
+        <button class="btn-publish-quiz" id="publish-btn">Publish quiz</button>
+      </div>
+
+      <div class="card">
+        <h3>Your quizzes</h3>
+        <div id="quiz-list"></div>
+      </div>
+    </div>
+
+    <!-- Quick Pulse (dark cinematic card) -->
+    <div class="quick-pulse-dark">
+      <div class="quick-pulse-kicker">Quick Pulse</div>
+      <h3 class="quick-pulse-heading">Ask the room right now</h3>
+      <label class="label-dark">Question</label>
+      <input type="text" id="pulse-question" class="input-dark">
+      <div id="pulse-options"></div>
+      <button class="btn btn-primary btn-block" id="go-live-btn" style="margin-top:12px;">Go live</button>
+      <div id="pulse-results" style="margin-top:16px;"></div>
+      <button class="btn btn-danger btn-block hidden" id="end-live-btn" style="margin-top:12px;">End</button>
+    </div>
+  </div>
+</div>
+
+<div id="results-modal" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center;">
+  <div class="card" style="max-width:500px; width:100%; max-height:80vh; overflow-y:auto;">
+    <div class="flex-between"><h3 id="results-title"></h3><button class="btn btn-ghost btn-sm" id="close-results">Close</button></div>
+    <div id="results-body"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script type="module" src="/static/js/teacher.js"></script>
+</body>
+</html>

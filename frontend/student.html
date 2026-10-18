@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Checkpoint - Student</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<!-- ===== DARK NAVBAR with profile chip ===== -->
+<div class="cinema-navbar">
+  <div class="shell nav-inner">
+    <div class="brand-logo-dark">Checkpoint</div>
+    <div class="nav-right-dark">
+      <div class="profile-chip-dark">
+        <div class="profile-avatar-dark" id="profile-avatar"></div>
+        <div class="profile-text-dark">
+          <span class="profile-name-dark" id="student-name"></span>
+          <span class="profile-role-dark">Student</span>
+        </div>
+      </div>
+      <button class="btn-logout-icon-dark" id="logout-btn" title="Log out">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="shell">
+
+  <!-- ===== NO CLASS STATE (unchanged, already matches the system) ===== -->
+  <div id="no-class" class="hidden create-class-wrap">
+    <div class="create-class-card">
+      <div class="create-class-icon">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+      </div>
+      <h3 class="create-class-title">Join a class</h3>
+      <p class="create-class-sub">Ask your teacher for the 6-character class code.</p>
+      <label>Class code</label>
+      <input type="text" id="join-code" placeholder="e.g. AB12CD" style="text-transform:uppercase;">
+      <button class="btn-create-class" id="join-btn">Join class</button>
+      <span class="back-to-dashboard-link" id="cancel-join-class">Back to dashboard</span>
+    </div>
+  </div>
+
+  <!-- ===== MAIN DASHBOARD ===== -->
+  <div id="dashboard" class="hidden dashboard-pad">
+
+    <!-- Class switcher -->
+    <div class="toolbar-row" style="margin-bottom:24px;">
+      <div class="flex" style="align-items:center; gap:10px;">
+        <div class="class-switcher-pro">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5v6"></path><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"></path></svg>
+          <select id="class-select"></select>
+          <svg class="switcher-chevron" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <button type="button" class="btn-new-class-sm" id="join-another-btn">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Join another class
+        </button>
+      </div>
+    </div>
+
+    <!-- Live pulse banner (dark cinematic, matches homepage live-now) -->
+    <div id="pulse-banner" class="live-pulse-elegant hidden">
+      <div class="live-pulse-header">
+        <span class="live-badge"><span class="live-dot"></span>Live now</span>
+      </div>
+      <h3 id="pulse-question" class="live-pulse-question"></h3>
+      <div id="pulse-options" class="stack" style="margin-top:14px;"></div>
+      <p class="live-answered-msg hidden" id="pulse-answered">Answer sent - thanks!</p>
+    </div>
+
+    <!-- Skill map (Khan Academy rings) -->
+    <div class="card">
+      <h3 class="section-heading-mini">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+        My skill map
+      </h3>
+      <p class="muted" style="margin-bottom:20px;">Built from every quiz you've taken</p>
+      <div id="skill-map" class="skill-ring-row"></div>
+    </div>
+
+    <!-- Quiz list -->
+    <div class="card">
+      <h3 class="section-heading-mini">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
+        Quizzes
+      </h3>
+      <div id="quiz-list" class="stack"></div>
+    </div>
+  </div>
+</div>
+
+<div id="quiz-modal" class="hidden" style="position:fixed; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; padding:20px;">
+  <div class="card" style="max-width:550px; width:100%; max-height:85vh; overflow-y:auto;">
+    <div class="flex-between"><h3 id="quiz-modal-title"></h3><button class="btn btn-ghost btn-sm" id="close-quiz">Close</button></div>
+    <p class="muted" id="quiz-modal-mode"></p>
+    <div id="quiz-modal-body"></div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<script type="module" src="/static/js/student.js"></script>
+</body>
+</html>

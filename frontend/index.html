@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkpoint</title>
+<link rel="stylesheet" href="/static/css/style.css">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap');
+  html, body { margin:0; padding:0; font-family:'Inter',sans-serif; background:#fff; color:#000; }
+  .disp { font-family:'Fraunces',serif; }
+
+  /* NAVBAR */
+  .home-navbar { display:flex; align-items:center; justify-content:space-between; padding:18px 32px; background:#0b0f0e; }
+  .home-brand { font-size:21px; font-weight:600; color:#fff; }
+  .home-nav-links { display:flex; align-items:center; gap:24px; font-size:13px; color:#c8d3cf; font-weight:500; }
+  .home-nav-signup { background:none; border:none; color:#c8d3cf; font-family:'Inter',sans-serif; font-size:13px; font-weight:500; cursor:pointer; }
+  .home-nav-signup:hover { color:#fff; }
+  .home-signin-btn { background:#3f927f; color:#fff; padding:9px 18px; border-radius:6px; font-size:12px; font-weight:700; border:none; cursor:pointer; font-family:'Inter',sans-serif; }
+  .home-signin-btn:hover { background:#2f6f60; }
+
+  /* HERO */
+  .home-hero { padding:64px 32px 50px; background:linear-gradient(180deg,#0b0f0e,#111917); text-align:center; }
+  .home-hero-heading { font-size:2.3rem; font-weight:600; line-height:1.2; color:#fff; max-width:580px; margin:0 auto; }
+  .home-hero-accent { color:#5dcaa5; }
+  .home-hero-sub { font-size:13px; color:#9fb0ab; margin-top:14px; max-width:440px; margin-left:auto; margin-right:auto; }
+  .home-hero-cta { margin-top:22px; display:inline-block; background:#3f927f; color:#fff; padding:12px 28px; border-radius:8px; font-weight:700; font-size:13px; border:none; cursor:pointer; font-family:'Inter',sans-serif; }
+  .home-hero-cta:hover { background:#2f6f60; }
+
+  /* PROGRESS RINGS */
+  .home-progress-section { padding:48px 32px; background:#f7f9f8; }
+  .home-progress-badge { text-align:center; font-size:11px; font-weight:800; letter-spacing:0.06em; text-transform:uppercase; color:#92680f; background:#f9d476; display:inline-block; padding:5px 14px; border-radius:999px; margin-bottom:14px; margin-left:calc(50% - 68px); }
+  .home-progress-title { font-size:20px; font-weight:600; text-align:center; margin-bottom:8px; }
+  .home-progress-sub { font-size:12px; color:#666; text-align:center; margin-bottom:28px; }
+  .home-rings-row { display:flex; justify-content:center; gap:32px; flex-wrap:wrap; align-items:center; }
+  .home-ring-label { font-size:11px; font-weight:700; margin-top:6px; text-align:center; }
+  .home-live-card { background:#0b0f0e; border-radius:14px; padding:16px 20px; text-align:left; }
+  .home-live-kicker { color:#5dcaa5; font-size:10px; font-weight:800; letter-spacing:0.05em; text-transform:uppercase; }
+  .home-live-value { color:#fff; font-size:15px; margin-top:4px; font-weight:600; }
+  .home-live-sub { color:#9fb0ab; font-size:10px; margin-top:2px; }
+
+  /* HOW IT WORKS */
+  .home-how-section { padding:48px 32px; background:#fff; }
+  .home-how-title { font-size:20px; font-weight:600; text-align:center; margin-bottom:28px; }
+  .home-bento { display:grid; grid-template-columns:1.3fr 1fr; grid-template-rows:repeat(2,auto); gap:14px; }
+  .home-bento-main { grid-row:1/3; background:#f7f9f8; border-radius:14px; padding:28px; display:flex; flex-direction:column; justify-content:center; }
+  .home-bento-icon { width:42px; height:42px; border-radius:11px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .home-bento-main h3 { font-weight:700; font-size:18px; margin:0; }
+  .home-bento-main p { font-size:13px; color:#555; margin-top:8px; max-width:280px; }
+  .home-bars { display:flex; align-items:flex-end; gap:6px; margin-top:18px; height:36px; }
+  .home-bar { width:14px; border-radius:3px; }
+  .home-bento-small { background:#f7f9f8; border-radius:14px; padding:22px; }
+  .home-bento-small-icon { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+  .home-bento-small h3 { font-weight:700; font-size:14px; margin:0; }
+  .home-bento-small p { font-size:12px; color:#666; margin-top:6px; }
+
+  /* FOOTER */
+  .home-footer { background:#0b0f0e; padding:24px 32px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; }
+  .home-footer-links { display:flex; gap:20px; }
+  .home-footer-links a { color:#9fb0ab; font-size:12px; text-decoration:none; }
+  .home-footer-links a:hover { color:#fff; }
+  .home-footer-copy { color:#6b7d78; font-size:11px; }
+
+  @media (max-width: 640px) {
+    .home-nav-links { display:none; }
+    .home-bento { grid-template-columns:1fr; }
+    .home-bento-main { grid-row:auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="home-navbar">
+  <div class="disp home-brand">Checkpoint</div>
+  <div class="home-nav-links">
+    <span>For teachers</span><span>For students</span><span>How it works</span>
+  </div>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <button type="button" class="home-nav-signup" id="tab-signup">Sign up</button>
+    <button type="button" class="home-signin-btn" id="tab-login">Sign in</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="home-hero">
+  <h1 class="disp home-hero-heading">See what's actually landing - <span class="home-hero-accent">not what homework pretends to show</span></h1>
+  <p class="home-hero-sub">Quick checks and live pulses that show real understanding, on your schedule.</p>
+  <button type="button" class="home-hero-cta" id="hero-get-started">Get started free</button>
+</div>
+
+<!-- PROGRESS RINGS (with live-now folded in, single cohesive section) -->
+<div class="home-progress-section">
+  <div class="home-progress-badge">Your progress</div>
+  <div class="disp home-progress-title">Mastery, always visible</div>
+  <div class="home-progress-sub">Updated live as your class answers - like right now, in Critical Thinking 201.</div>
+  <div class="home-rings-row">
+    <div style="text-align:center;">
+      <svg width="76" height="76" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#e5ece9" stroke-width="9"/>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#3f927f" stroke-width="9" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="40" transform="rotate(-90 50 50)"/>
+        <text x="50" y="57" text-anchor="middle" font-family="Inter" font-weight="800" font-size="18" fill="#000">85%</text>
+      </svg>
+      <div class="home-ring-label">Definitions</div>
+    </div>
+    <div style="text-align:center;">
+      <svg width="76" height="76" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#e5ece9" stroke-width="9"/>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#f9d476" stroke-width="9" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="145" transform="rotate(-90 50 50)"/>
+        <text x="50" y="57" text-anchor="middle" font-family="Inter" font-weight="800" font-size="18" fill="#000">45%</text>
+      </svg>
+      <div class="home-ring-label">Conditions</div>
+    </div>
+    <div style="text-align:center;">
+      <svg width="76" height="76" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#e5ece9" stroke-width="9"/>
+        <circle cx="50" cy="50" r="42" fill="none" stroke="#99b384" stroke-width="9" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="15" transform="rotate(-90 50 50)"/>
+        <text x="50" y="57" text-anchor="middle" font-family="Inter" font-weight="800" font-size="18" fill="#000">94%</text>
+      </svg>
+      <div class="home-ring-label">Syllogisms</div>
+    </div>
+    <div class="home-live-card">
+      <div class="home-live-kicker">Live now</div>
+      <div class="disp home-live-value">82% answered</div>
+      <div class="home-live-sub">in the last 40 seconds</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS (rebalanced bento) -->
+<div class="home-how-section">
+  <div class="disp home-how-title">Built to fit around teaching</div>
+  <div class="home-bento">
+    <div class="home-bento-main">
+      <div class="home-bento-icon" style="background:#3f927f;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <h3>Watch understanding live</h3>
+      <p>Push a question mid-class and see a live bar chart of answers fill in as students respond - no waiting for grading.</p>
+      <div class="home-bars">
+        <div class="home-bar" style="height:60%; background:#3f927f;"></div>
+        <div class="home-bar" style="height:90%; background:#3f927f;"></div>
+        <div class="home-bar" style="height:40%; background:#cfe0da;"></div>
+        <div class="home-bar" style="height:75%; background:#3f927f;"></div>
+      </div>
+    </div>
+    <div class="home-bento-small">
+      <div class="home-bento-small-icon" style="background:#99b384;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/></svg>
+      </div>
+      <h3>Run checks on schedule</h3>
+      <p>After a lecture, weekly, or exam review.</p>
+    </div>
+    <div class="home-bento-small">
+      <div class="home-bento-small-icon" style="background:#f9d476;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4a3a00" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+      </div>
+      <h3>Everyone sees the gaps</h3>
+      <p>Per-topic breakdown, class and individual.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Real login/signup modal - opens when Sign in / Sign up / Get started is clicked -->
+<div id="auth-modal" class="modal-overlay hidden">
+  <div class="card auth-card">
+    <div class="flex-between" style="margin-bottom:18px;">
+      <div class="pill-toggle-alt" id="modal-pill-track">
+        <div class="pill-slider" id="pill-slider"></div>
+        <button type="button" class="pill-btn-alt active" id="modal-tab-login">Log in</button>
+        <button type="button" class="pill-btn-alt" id="modal-tab-signup">Sign up</button>
+      </div>
+      <span id="close-modal" class="modal-close">&times;</span>
+    </div>
+
+    <form id="login-form">
+      <div class="mascot-badge mascot-login">
+        <svg viewBox="0 0 60 60" width="48" height="48">
+          <circle cx="30" cy="30" r="28" fill="#3f927f"/>
+          <g class="blink-eyes">
+            <circle cx="21" cy="26" r="4" fill="#fff"/>
+            <circle cx="21.5" cy="25.5" r="1.6" fill="#1f4f43"/>
+            <circle cx="39" cy="26" r="4" fill="#fff"/>
+            <circle cx="39.5" cy="25.5" r="1.6" fill="#1f4f43"/>
+          </g>
+          <path d="M20 36 Q30 43 40 36" stroke="#fff" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="form-greeting">Welcome back!</p>
+      <label>Email</label>
+      <input type="email" id="login-email" required>
+      <label>Password</label>
+      <div class="password-wrap">
+        <input type="password" id="login-password" required>
+        <button type="button" class="password-toggle" data-target="login-password">Show</button>
+      </div>
+      <button class="btn-auth btn-block" type="submit">Log in</button>
+    </form>
+
+    <form id="signup-form" class="hidden">
+      <div class="mascot-badge mascot-signup">
+        <svg viewBox="0 0 60 60" width="48" height="48">
+          <circle cx="30" cy="30" r="28" fill="#99b384"/>
+          <circle cx="21" cy="26" r="4.5" fill="#fff"/>
+          <circle cx="22" cy="25" r="1.8" fill="#3c5a2c"/>
+          <circle cx="39" cy="26" r="4.5" fill="#fff"/>
+          <circle cx="40" cy="25" r="1.8" fill="#3c5a2c"/>
+          <path d="M18 35 Q30 48 42 35 Q30 42 18 35 Z" fill="#fff"/>
+          <g class="wave-arm">
+            <rect x="44" y="18" width="7" height="20" rx="3.5" fill="#f9d476" transform="rotate(18 47 28)"/>
+            <circle cx="50" cy="16" r="4.5" fill="#f9d476"/>
+          </g>
+          <g class="sparkle" style="animation-delay:0s">
+            <path d="M8 14 l1.6 3.4 3.4 1.6 -3.4 1.6 -1.6 3.4 -1.6 -3.4 -3.4 -1.6 3.4 -1.6 z" fill="#f9d476"/>
+          </g>
+          <g class="sparkle" style="animation-delay:.5s">
+            <circle cx="50" cy="46" r="2.4" fill="#f9d476"/>
+          </g>
+        </svg>
+      </div>
+      <p class="form-greeting">Let's get you set up!</p>
+      <label>I am a</label>
+      <div class="role-cards">
+        <div class="role-card active" data-role="student">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5v6"></path><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"></path></svg>
+          <span>Student</span>
+        </div>
+        <div class="role-card" data-role="teacher">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          <span>Teacher</span>
+        </div>
+      </div>
+      <input type="hidden" id="signup-role" value="student">
+
+      <label>Name</label>
+      <input type="text" id="signup-name" required>
+      <label>Email</label>
+      <input type="email" id="signup-email" required>
+      <label>Password</label>
+      <div class="password-wrap">
+        <input type="password" id="signup-password" required minlength="6">
+        <button type="button" class="password-toggle" data-target="signup-password">Show</button>
+      </div>
+      <button class="btn-auth btn-block" type="submit">Sign up</button>
+    </form>
+  </div>
+</div>
+
+<footer class="home-footer">
+  <div class="disp" style="color:#fff; font-size:15px; font-weight:600;">Checkpoint</div>
+  <div class="home-footer-links">
+    <a href="#">How it works</a>
+    <a href="#">For teachers</a>
+    <a href="#">For students</a>
+  </div>
+  <div class="home-footer-copy">&copy; 2026 Checkpoint. Built for university classes.</div>
+</footer>
+
+<div id="toast"></div>
+<script type="module" src="/static/js/auth.js"></script>
+</body>
+</html>
